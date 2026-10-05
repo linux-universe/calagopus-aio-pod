@@ -50,6 +50,8 @@ The [calagopus aio compose file](https://raw.githubusercontent.com/calagopus/pan
    systemctl start calagopus-pod
    ```
 
+   > Run steps 5, and 6 with the `--user` argument for rootless setups.
+
 7. In `wings-config.yml`:
 
    ```diff
@@ -59,8 +61,6 @@ The [calagopus aio compose file](https://raw.githubusercontent.com/calagopus/pan
    -    type: local
    +    type: json-file
    ```
-
-> Run steps 5, and 6 with the `--user` argument for rootless setups.
 
 The panel is available at `http://<host>:8000`, SFTP on port `2022`.
 
