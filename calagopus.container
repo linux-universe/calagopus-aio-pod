@@ -1,5 +1,6 @@
 [Unit]
 Requires=podman.socket calagopus-db.container calagopus-cache.container
+After=calagopus-db.container calagopus-cache.container
 
 [Container]
 Pod=calagopus.pod
@@ -39,7 +40,7 @@ Volume=/var/log/calagopus-wings:/var/log/calagopus-wings:z
 #Volume=%h/data/calagopus/panel/build/binaries:/app/binaries
 #Volume=%h/data/calagopus/panel/build/translations:/app/translations
 #Volume=%h/data/calagopus/panel/build/extensions:/app/extensions
-#Volume=%h/data/calagopus/panel/build/extension-migrations:/app/repo/database/extension-migrationsu
+#Volume=%h/data/calagopus/panel/build/extension-migrations:/app/repo/database/extension-migrations
 
 [Service]
 TimeoutStartSec=900
