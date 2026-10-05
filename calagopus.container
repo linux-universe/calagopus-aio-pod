@@ -4,7 +4,8 @@ Requires=podman.socket calagopus-db.container calagopus-cache.container
 [Container]
 Pod=calagopus.pod
 AutoUpdate=registry
-Image=ghcr.io/calagopus/panel:heavy-aio
+# change to :heavy-aio when using extensions
+Image=ghcr.io/calagopus/panel:aio
 
 Environment=TZ=Europe/Zurich
 Environment=REDIS_URL=redis://127.0.0.1
