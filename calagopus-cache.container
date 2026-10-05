@@ -1,0 +1,12 @@
+[Container]
+Pod=calagopus.pod
+AutoUpdate=registry
+Image=ghcr.io/calagopus/valkey:latest
+
+Exec=--protected-mode no --save 60 1
+Environment=TZ=Europe/Zurich
+Volume=calagopus-cache:/data:z
+
+[Service]
+TimeoutStartSec=900
+

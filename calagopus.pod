@@ -1,0 +1,6 @@
+[Pod]
+PublishPort=8000:8000
+PublishPort=2022:2022
+
+[Install]
+WantedBy=default.target

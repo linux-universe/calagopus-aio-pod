@@ -1,0 +1,45 @@
+[Unit]
+Requires=podman.socket calagopus-db.container calagopus-cache.container
+
+[Container]
+Pod=calagopus.pod
+AutoUpdate=registry
+Image=ghcr.io/calagopus/panel:heavy-aio
+
+Environment=TZ=Europe/Zurich
+Environment=REDIS_URL=redis://127.0.0.1
+Environment=DATABASE_URL=postgresql://panel:panel@127.0.0.1/panel
+Environment=DATABASE_MIGRATE=true
+Environment=PORT=8000
+Environment=AIO_BASE_WINGS_CONFIGURATION=/wings-config.yml
+Environment=APP_DEBUG=false
+Environment=APP_LOG_DIRECTORY=/var/log/calagopus
+Environment=APP_PRIMARY=true
+Environment=APP_ENABLE_WINGS_PROXY=true
+# generate with `cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
+Environment=APP_ENCRYPTION_KEY=
+Environment=APP_USE_DECRYPTION_CACHE=true
+Environment=APP_USE_INTERNAL_CACHE=true
+
+#panel
+Volume=%h/data/calagopus/panel/data:/var/lib/calagopus:z
+Volume=%h/data/calagopus/panel/logs:/var/log/calagopus:z
+
+#wings
+Volume=./wings-config.yml:/wings-config.yml:z
+Volume=%t/podman/podman.sock:/var/run/docker.sock
+SecurityLabelDisable=true
+Volume=/etc/calagopus-wings:/etc/calagopus-wings:z
+Volume=/var/lib/calagopus-wings:/var/lib/calagopus-wings:z
+Volume=/var/log/calagopus-wings:/var/log/calagopus-wings:z
+
+##heavy
+##run `mkdir -p ~/data/calagopus/panel/build/{binaries,translations,extensions,extension-migrations}`
+#Volume=%h/data/calagopus/panel/build/binaries:/app/binaries
+#Volume=%h/data/calagopus/panel/build/translations:/app/translations
+#Volume=%h/data/calagopus/panel/build/extensions:/app/extensions
+#Volume=%h/data/calagopus/panel/build/extension-migrations:/app/repo/database/extension-migrationsu
+
+[Service]
+TimeoutStartSec=900
+

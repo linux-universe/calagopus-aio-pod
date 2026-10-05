@@ -1,0 +1,16 @@
+[Container]
+Pod=calagopus.pod
+AutoUpdate=registry
+Image=ghcr.io/calagopus/pgautoupgrade:18-alpine
+
+Environment=TZ=Europe/Zurich
+Environment=POSTGRES_USER=panel
+Environment=POSTGRES_PASSWORD=panel
+Environment=POSTGRES_DB=panel
+Environment=PGDATA=/data
+
+Volume=%h/data/calagopus/db:/data:z
+
+[Service]
+TimeoutStartSec=900
+
